@@ -1,150 +1,124 @@
 import { motion } from 'framer-motion';
-import { aboutData, personalInfo } from '../utils/data';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { MapPin, Mail, Phone, GraduationCap } from 'lucide-react';
+import { aboutData, personalInfo } from '../utils/data';
+import { Mail, MapPin, BookOpen } from 'lucide-react';
 
 const About = () => {
   const [ref, visible] = useScrollReveal();
 
-  const containerVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.1 } },
-  };
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-  };
-
   return (
-    <section id="about" style={{ padding: '100px 0', position: 'relative' }}>
-      {/* BG orb */}
-      <div className="orb orb-secondary" style={{ width: 400, height: 400, top: '10%', left: '-5%', opacity: 0.1 }} />
-
-      <motion.div
-        ref={ref}
-        variants={containerVariants}
-        initial="hidden"
-        animate={visible ? 'visible' : 'hidden'}
-        style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}
-      >
-        {/* Section Header */}
-        <motion.div variants={itemVariants} style={{ marginBottom: 60 }}>
-          <div className="section-tag">🧑‍💻 About Me</div>
+    <section id="about" className="section bg-secondary">
+      <div className="container-main">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 30 }}
+          animate={visible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Section Header */}
+          <span className="section-label">About Me</span>
           <h2 className="section-title">
-            Who I Am &{' '}
-            <span className="gradient-text">What I Do</span>
+            Who I Am
           </h2>
-          <p className="section-subtitle">
-            A passionate developer blending code, creativity, and AI curiosity.
-          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mt-10">
+
+            {/* Left: Bio */}
+            <div className="space-y-5">
+              {aboutData.description.map((para, i) => (
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={visible ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="text-text-muted leading-relaxed"
+                >
+                  {para}
+                </motion.p>
+              ))}
+
+              {/* Contact Info */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={visible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.35 }}
+                className="pt-4 space-y-3"
+              >
+                <div className="flex items-center gap-3 text-sm">
+                  <Mail size={15} className="text-accent flex-shrink-0" />
+                  <a href={`mailto:${personalInfo.email}`} className="text-text-muted hover:text-accent transition-colors">
+                    {personalInfo.email}
+                  </a>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <MapPin size={15} className="text-accent flex-shrink-0" />
+                  <span className="text-text-muted">{personalInfo.location}</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm">
+                  <BookOpen size={15} className="text-accent flex-shrink-0" />
+                  <span className="text-text-muted">{personalInfo.education}</span>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right: Stats + Traits */}
+            <div className="space-y-8">
+
+              {/* Stats Grid */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={visible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-4"
+              >
+                {aboutData.stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="card text-center p-4"
+                  >
+                    <div className="font-heading text-2xl font-bold gradient-text mb-1">
+                      {stat.value}
+                    </div>
+                    <div className="text-text-subtle text-xs">{stat.label}</div>
+                  </div>
+                ))}
+              </motion.div>
+
+              {/* Traits */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={visible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <p className="text-text-subtle text-xs uppercase tracking-widest mb-3">Traits</p>
+                <div className="flex flex-wrap gap-2">
+                  {aboutData.traits.map((trait) => (
+                    <span key={trait.label} className="skill-badge">
+                      {trait.label}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Interests */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={visible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <p className="text-text-subtle text-xs uppercase tracking-widest mb-3">Interests</p>
+                <div className="flex flex-wrap gap-2">
+                  {aboutData.interests.map((interest) => (
+                    <span key={interest} className="px-3 py-1.5 text-xs text-text-subtle border border-white/5 rounded-md">
+                      {interest}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </motion.div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'start' }}
-          className="block md:grid">
-          {/* Left — Description */}
-          <motion.div variants={itemVariants}>
-            {aboutData.description.map((para, i) => (
-              <p key={i} style={{ color: '#94A3B8', lineHeight: 1.8, marginBottom: 20, fontSize: '1rem' }}>
-                {para}
-              </p>
-            ))}
-
-            {/* Contact Info */}
-            <div style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {[
-                { icon: MapPin, value: personalInfo.location, color: '#7C3AED' },
-                { icon: Mail, value: personalInfo.email, color: '#06B6D4' },
-                { icon: Phone, value: personalInfo.phone, color: '#8B5CF6' },
-                { icon: GraduationCap, value: personalInfo.education, color: '#F59E0B' },
-              ].map(({ icon: Icon, value, color }) => (
-                <div key={value} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: 10,
-                    background: `rgba(${color === '#7C3AED' ? '124,58,237' : color === '#06B6D4' ? '6,182,212' : color === '#8B5CF6' ? '139,92,246' : '245,158,11'},0.15)`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}>
-                    <Icon size={16} color={color} />
-                  </div>
-                  <span style={{ color: '#94A3B8', fontSize: '0.9rem' }}>{value}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right — Traits, Stats, Interests */}
-          <motion.div variants={itemVariants}>
-            {/* Stats */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 32 }}>
-              {aboutData.stats.map(({ value, label }) => (
-                <div key={label} className="glass-card" style={{ padding: '20px', textAlign: 'center' }}>
-                  <div style={{
-                    fontFamily: 'Sora, sans-serif',
-                    fontSize: '2rem',
-                    fontWeight: 800,
-                    background: 'linear-gradient(135deg, #7C3AED, #06B6D4)',
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                  }}>
-                    {value}
-                  </div>
-                  <div style={{ color: '#94A3B8', fontSize: '0.85rem', marginTop: 4 }}>{label}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Traits */}
-            <div style={{ marginBottom: 28 }}>
-              <div style={{ color: '#F8FAFC', fontWeight: 600, marginBottom: 14, fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                Personal Traits
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-                {aboutData.traits.map(({ icon, label }) => (
-                  <motion.div
-                    key={label}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    className="glass-card"
-                    style={{
-                      padding: '8px 16px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      fontSize: '0.85rem',
-                      color: '#F8FAFC',
-                      cursor: 'none',
-                    }}
-                  >
-                    <span>{icon}</span> {label}
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Interests */}
-            <div>
-              <div style={{ color: '#F8FAFC', fontWeight: 600, marginBottom: 14, fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                Interests
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {aboutData.interests.map(interest => (
-                  <span
-                    key={interest}
-                    className="neon-badge"
-                    style={{ background: 'rgba(6,182,212,0.1)', borderColor: 'rgba(6,182,212,0.3)', color: '#06B6D4' }}
-                  >
-                    {interest}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

@@ -1,32 +1,20 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { personalInfo } from '../utils/data';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Send, Mail, Phone, MapPin } from 'lucide-react';
-import { FaGithub, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
-import toast, { Toaster } from 'react-hot-toast';
+import { personalInfo } from '../utils/data';
+import { Send, Mail, MapPin, Phone } from 'lucide-react';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
-
-const contactDetails = [
-  { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}`, color: '#7C3AED' },
-  { icon: Phone, label: 'Phone', value: personalInfo.phone, href: `tel:${personalInfo.phone}`, color: '#06B6D4' },
-  { icon: MapPin, label: 'Location', value: personalInfo.location, href: '#', color: '#8B5CF6' },
-];
-
-const socialLinks = [
-  { icon: FaGithub, href: personalInfo.github, label: 'GitHub', color: '#F8FAFC' },
-  { icon: FaLinkedinIn, href: personalInfo.linkedin, label: 'LinkedIn', color: '#0A66C2' },
-  { icon: FaInstagram, href: personalInfo.instagram, label: 'Instagram', color: '#E1306C' },
-];
 
 const Contact = () => {
   const [ref, visible] = useScrollReveal();
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [sending, setSending] = useState(false);
 
-  const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  const handleChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,217 +25,188 @@ const Contact = () => {
     setSending(true);
     try {
       await axios.post(`${BACKEND_URL}/api/contact`, form);
-      toast.success('Message sent successfully! I\'ll get back to you soon. 🚀');
+      toast.success("Message sent! I'll get back to you soon.");
       setForm({ name: '', email: '', subject: '', message: '' });
     } catch {
-      toast.error('Something went wrong. Please try again or email me directly.');
+      toast.error('Something went wrong. Please try again.');
     } finally {
       setSending(false);
     }
   };
 
   return (
-    <section id="contact" style={{ padding: '100px 0', position: 'relative' }}>
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          style: { background: '#1e293b', color: '#F8FAFC', border: '1px solid rgba(124,58,237,0.3)' },
-        }}
-      />
+    <section id="contact" className="section bg-secondary">
+      <Toaster position="top-right" toastOptions={{
+        style: { background: '#1A2235', color: '#F9FAFB', border: '1px solid rgba(255,255,255,0.08)' }
+      }} />
 
-      <div className="orb orb-primary" style={{ width: 400, height: 400, bottom: '5%', left: '-5%', opacity: 0.12 }} />
-      <div className="orb orb-secondary" style={{ width: 300, height: 300, top: '10%', right: '-3%', opacity: 0.1 }} />
-
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0 }}
-        animate={visible ? { opacity: 1 } : {}}
-        style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}
-      >
-        {/* Header */}
+      <div className="container-main">
         <motion.div
+          ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          style={{ marginBottom: 60 }}
         >
-          <div className="section-tag">📬 Contact</div>
-          <h2 className="section-title">
-            Let's Build Something{' '}
-            <span className="gradient-text">Great Together</span>
-          </h2>
-          <p className="section-subtitle">
-            Open to internships, collaborations, freelance work, and exciting tech projects.
+          {/* Header */}
+          <span className="section-label">Contact</span>
+          <h2 className="section-title">Get In Touch</h2>
+          <p className="section-subtitle mb-12">
+            Have a project in mind or want to collaborate? I'd love to hear from you.
           </p>
-        </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 48, alignItems: 'start' }}
-          className="block md:grid">
-          {/* Left — Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={visible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {contactDetails.map(({ icon: Icon, label, value, href, color }) => (
-              <a
-                key={label}
-                href={href}
-                style={{ textDecoration: 'none', cursor: 'none' }}
-              >
-                <motion.div
-                  whileHover={{ x: 6 }}
-                  className="glass-card"
-                  style={{ padding: '18px 20px', display: 'flex', alignItems: 'center', gap: 16, marginBottom: 14, cursor: 'none' }}
-                >
-                  <div style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: 12,
-                    background: `${color}15`,
-                    border: `1px solid ${color}30`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}>
-                    <Icon size={18} color={color} />
-                  </div>
-                  <div>
-                    <div style={{ color: '#94A3B8', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 2 }}>
-                      {label}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+
+            {/* Left Info Column */}
+            <div className="lg:col-span-2 space-y-6">
+              <div>
+                <h3 className="font-heading font-semibold text-text-primary text-lg mb-4">
+                  Contact Info
+                </h3>
+                <div className="space-y-4">
+                  <a href={`mailto:${personalInfo.email}`}
+                    className="flex items-start gap-3 group">
+                    <div className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
+                      <Mail size={15} className="text-accent" />
                     </div>
-                    <div style={{ color: '#F8FAFC', fontWeight: 500, fontSize: '0.9rem' }}>{value}</div>
-                  </div>
-                </motion.div>
-              </a>
-            ))}
+                    <div>
+                      <p className="text-text-subtle text-xs mb-0.5">Email</p>
+                      <p className="text-text-muted text-sm group-hover:text-accent transition-colors break-all">
+                        {personalInfo.email}
+                      </p>
+                    </div>
+                  </a>
 
-            {/* Social */}
-            <div className="glass-card" style={{ padding: '20px', marginTop: 8 }}>
-              <div style={{ color: '#94A3B8', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 16 }}>
-                Find Me Online
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
+                      <MapPin size={15} className="text-accent" />
+                    </div>
+                    <div>
+                      <p className="text-text-subtle text-xs mb-0.5">Location</p>
+                      <p className="text-text-muted text-sm">{personalInfo.location}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
+                      <Phone size={15} className="text-accent" />
+                    </div>
+                    <div>
+                      <p className="text-text-subtle text-xs mb-0.5">Phone</p>
+                      <p className="text-text-muted text-sm">{personalInfo.phone}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div style={{ display: 'flex', gap: 14 }}>
-                {socialLinks.map(({ icon: Icon, href, label, color }) => (
-                  <motion.a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={label}
-                    whileHover={{ scale: 1.2, y: -3 }}
-                    style={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: 12,
-                      background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: '#94A3B8',
-                      transition: 'color 0.3s',
-                      cursor: 'none',
-                    }}
-                  >
-                    <Icon size={20} />
-                  </motion.a>
-                ))}
+
+              {/* Social Links */}
+              <div>
+                <p className="text-text-subtle text-xs uppercase tracking-widest mb-3">Socials</p>
+                <div className="flex gap-3">
+                  <a href={personalInfo.github} target="_blank" rel="noreferrer" id="contact-github"
+                    className="w-10 h-10 rounded-lg border border-white/8 flex items-center justify-center text-text-muted hover:text-text-primary hover:border-white/20 transition-all">
+                    <FaGithub size={17} />
+                  </a>
+                  <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" id="contact-linkedin"
+                    className="w-10 h-10 rounded-lg border border-white/8 flex items-center justify-center text-text-muted hover:text-text-primary hover:border-white/20 transition-all">
+                    <FaLinkedinIn size={17} />
+                  </a>
+                </div>
+              </div>
+
+              {/* Availability note */}
+              <div className="card">
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-emerald-400 text-sm font-medium">Available for opportunities</span>
+                </div>
+                <p className="text-text-subtle text-xs leading-relaxed">
+                  Open to full stack, frontend, or freelance opportunities.
+                </p>
               </div>
             </div>
-          </motion.div>
 
-          {/* Right — Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={visible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="glass-card"
-            style={{ padding: 36 }}
-          >
-            <form onSubmit={handleSubmit} id="contact-form">
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+            {/* Right Form */}
+            <div className="lg:col-span-3">
+              <form onSubmit={handleSubmit} className="card space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-text-subtle text-xs mb-1.5">Name *</label>
+                    <input
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      className="input"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-text-subtle text-xs mb-1.5">Email *</label>
+                    <input
+                      id="contact-email"
+                      name="email"
+                      type="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="your@email.com"
+                      className="input"
+                      required
+                    />
+                  </div>
+                </div>
+
                 <div>
-                  <label style={{ color: '#94A3B8', fontSize: '0.8rem', display: 'block', marginBottom: 6 }}>
-                    Your Name *
-                  </label>
+                  <label className="block text-text-subtle text-xs mb-1.5">Subject</label>
                   <input
+                    id="contact-subject"
+                    name="subject"
                     type="text"
-                    name="name"
-                    value={form.name}
+                    value={form.subject}
                     onChange={handleChange}
-                    placeholder="John Doe"
-                    className="form-input"
-                    id="contact-name"
-                    required
+                    placeholder="What's this about?"
+                    className="input"
                   />
                 </div>
+
                 <div>
-                  <label style={{ color: '#94A3B8', fontSize: '0.8rem', display: 'block', marginBottom: 6 }}>
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
+                  <label className="block text-text-subtle text-xs mb-1.5">Message *</label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows={5}
+                    value={form.message}
                     onChange={handleChange}
-                    placeholder="john@example.com"
-                    className="form-input"
-                    id="contact-email"
+                    placeholder="Tell me about your project or idea..."
+                    className="input resize-none"
                     required
                   />
                 </div>
-              </div>
 
-              <div style={{ marginBottom: 16 }}>
-                <label style={{ color: '#94A3B8', fontSize: '0.8rem', display: 'block', marginBottom: 6 }}>
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={form.subject}
-                  onChange={handleChange}
-                  placeholder="Project collaboration, internship opportunity..."
-                  className="form-input"
-                  id="contact-subject"
-                />
-              </div>
-
-              <div style={{ marginBottom: 24 }}>
-                <label style={{ color: '#94A3B8', fontSize: '0.8rem', display: 'block', marginBottom: 6 }}>
-                  Message *
-                </label>
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  placeholder="Tell me about your project or opportunity..."
-                  className="form-input"
-                  id="contact-message"
-                  rows={5}
-                  style={{ resize: 'vertical', minHeight: 120 }}
-                  required
-                />
-              </div>
-
-              <motion.button
-                type="submit"
-                className="btn-primary"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                disabled={sending}
-                id="contact-submit"
-                style={{ width: '100%', justifyContent: 'center', opacity: sending ? 0.7 : 1 }}
-              >
-                <Send size={16} />
-                <span>{sending ? 'Sending...' : 'Send Message'}</span>
-              </motion.button>
-            </form>
-          </motion.div>
-        </div>
-      </motion.div>
+                <button
+                  type="submit"
+                  id="contact-submit"
+                  disabled={sending}
+                  className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {sending ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={16} />
+                      Send Message
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };

@@ -7,57 +7,54 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#7C3AED',
-        secondary: '#06B6D4',
-        accent: '#8B5CF6',
-        dark: '#0F172A',
-        darkCard: 'rgba(255,255,255,0.06)',
-        textMain: '#F8FAFC',
-        textMuted: '#94A3B8',
+        primary: '#0B1120',
+        secondary: '#111827',
+        card: '#1A2235',
+        accent: '#6366F1',
+        'accent-hover': '#4F46E5',
+        'accent-light': '#818CF8',
+        border: 'rgba(255,255,255,0.06)',
+        'text-primary': '#F9FAFB',
+        'text-muted': '#9CA3AF',
+        'text-subtle': '#6B7280',
       },
       fontFamily: {
-        heading: ['Sora', 'Poppins', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+        heading: ['Sora', 'sans-serif'],
+      },
+      fontSize: {
+        '2xs': '0.7rem',
       },
       animation: {
-        'gradient': 'gradient 8s ease infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'typing': 'typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite',
-        'fadeInUp': 'fadeInUp 0.7s ease-out forwards',
-        'slideInLeft': 'slideInLeft 0.7s ease-out forwards',
-        'slideInRight': 'slideInRight 0.7s ease-out forwards',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin-slow': 'spin 8s linear infinite',
+        'fade-in': 'fadeIn 0.6s ease forwards',
+        'fade-up': 'fadeUp 0.6s ease forwards',
+        'blink': 'blink 1s step-end infinite',
       },
       keyframes: {
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
+        fadeUp: {
+          '0%': { opacity: 0, transform: 'translateY(20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
         },
-        glow: {
-          from: { textShadow: '0 0 10px #7C3AED, 0 0 20px #7C3AED, 0 0 40px #7C3AED' },
-          to: { textShadow: '0 0 20px #06B6D4, 0 0 30px #06B6D4, 0 0 60px #06B6D4' },
-        },
-        fadeInUp: {
-          from: { opacity: '0', transform: 'translateY(40px)' },
-          to: { opacity: '1', transform: 'translateY(0)' },
-        },
-        slideInLeft: {
-          from: { opacity: '0', transform: 'translateX(-40px)' },
-          to: { opacity: '1', transform: 'translateX(0)' },
-        },
-        slideInRight: {
-          from: { opacity: '0', transform: 'translateX(40px)' },
-          to: { opacity: '1', transform: 'translateX(0)' },
+        blink: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0 },
         },
       },
-      backgroundSize: {
-        '300%': '300%',
+      backgroundImage: {
+        'gradient-accent': 'linear-gradient(135deg, #6366F1, #818CF8)',
+        'gradient-subtle': 'linear-gradient(135deg, rgba(99,102,241,0.1), rgba(129,140,248,0.05))',
+      },
+      boxShadow: {
+        'card': '0 4px 24px rgba(0,0,0,0.3)',
+        'card-hover': '0 8px 40px rgba(0,0,0,0.4)',
+        'accent': '0 4px 20px rgba(99,102,241,0.25)',
+      },
+      transitionTimingFunction: {
+        'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
       },
     },
   },

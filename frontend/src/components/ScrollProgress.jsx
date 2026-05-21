@@ -1,28 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const ScrollProgress = () => {
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
+    const update = () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = total > 0 ? (scrolled / total) * 100 : 0;
+      if (barRef.current) barRef.current.style.width = `${progress}%`;
     };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
   }, []);
 
   return (
-    <div
-      className="scroll-progress"
-      style={{ width: `${progress}%` }}
-      role="progressbar"
-      aria-valuenow={Math.round(progress)}
-      aria-valuemin={0}
-      aria-valuemax={100}
-    />
+    <div className="fixed top-0 left-0 right-0 z-[100] h-0.5 bg-transparent">
+      <div
+        ref={barRef}
+        className="h-full gradient-bg transition-none"
+        style={{ width: '0%' }}
+      />
+    </div>
   );
 };
 

@@ -1,360 +1,134 @@
 import { motion } from 'framer-motion';
-import { Download, Eye, Mail } from 'lucide-react';
-import { FaGithub, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
+import { ArrowDown, Download, Mail } from 'lucide-react';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { heroData, personalInfo } from '../utils/data';
 import { useTypingEffect } from '../hooks/useTypingEffect';
 
-const socialLinks = [
-  { icon: FaGithub, href: personalInfo.github, label: 'GitHub', id: 'hero-github' },
-  { icon: FaLinkedinIn, href: personalInfo.linkedin, label: 'LinkedIn', id: 'hero-linkedin' },
-  { icon: FaInstagram, href: personalInfo.instagram, label: 'Instagram', id: 'hero-instagram' },
-];
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
-};
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+});
 
 const Hero = () => {
-  const typedText = useTypingEffect(heroData.typingWords);
+  const typedText = useTypingEffect(heroData.typingWords, 80, 50, 2000);
 
   return (
     <section
       id="hero"
-      className="animated-bg"
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        paddingTop: 80,
-      }}
+      className="relative min-h-screen flex items-center pt-16"
     >
-      {/* Orbs */}
-      <div className="orb orb-primary" style={{ width: 500, height: 500, top: '-10%', right: '-5%', opacity: 0.25 }} />
-      <div className="orb orb-secondary" style={{ width: 400, height: 400, bottom: '-5%', left: '-5%', opacity: 0.2 }} />
-      <div className="orb orb-primary" style={{ width: 200, height: 200, bottom: '20%', right: '20%', opacity: 0.15 }} />
+      <div className="container-main w-full py-20 lg:py-0">
+        <div className="max-w-3xl">
 
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: '0 auto',
-          padding: '0 24px',
-          width: '100%',
-          display: 'grid',
-          gridTemplateColumns: '1fr auto',
-          gap: 60,
-          alignItems: 'center',
-          position: 'relative',
-          zIndex: 1,
-        }}
-        className="flex-col md:grid"
-      >
-        {/* Left Content */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
           {/* Greeting */}
-          <motion.div variants={itemVariants} style={{ marginBottom: 16 }}>
-            <span className="section-tag">
-              <span>👋</span> {heroData.greeting}
-            </span>
-          </motion.div>
+          <motion.p
+            {...fadeUp(0.1)}
+            className="text-accent text-sm font-semibold tracking-widest uppercase mb-6"
+          >
+            {heroData.greeting}
+          </motion.p>
 
           {/* Main Heading */}
           <motion.h1
-            variants={itemVariants}
-            style={{
-              fontFamily: 'Sora, sans-serif',
-              fontSize: 'clamp(2.4rem, 5.5vw, 3.8rem)',
-              fontWeight: 800,
-              lineHeight: 1.15,
-              color: '#F8FAFC',
-              marginBottom: 8,
-            }}
+            {...fadeUp(0.2)}
+            className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-text-primary leading-tight mb-6"
           >
             {heroData.heading}
           </motion.h1>
-          <motion.h1
-            variants={itemVariants}
-            className="gradient-text-alt"
-            style={{
-              fontFamily: 'Sora, sans-serif',
-              fontSize: 'clamp(2.4rem, 5.5vw, 3.8rem)',
-              fontWeight: 800,
-              lineHeight: 1.15,
-              marginBottom: 24,
-              display: 'block',
-            }}
-          >
-            {heroData.headingHighlight}
-          </motion.h1>
 
           {/* Typing Effect */}
-          <motion.div variants={itemVariants} style={{ marginBottom: 20 }}>
-            <span style={{ color: '#94A3B8', fontSize: '1.1rem', fontWeight: 400 }}>
-              I'm a{' '}
-            </span>
-            <span
-              style={{
-                color: '#06B6D4',
-                fontWeight: 600,
-                fontSize: '1.1rem',
-                fontFamily: 'Sora, sans-serif',
-              }}
-            >
+          <motion.div
+            {...fadeUp(0.3)}
+            className="flex items-center gap-2 mb-6 h-8"
+          >
+            <span className="text-lg sm:text-xl text-text-muted font-medium">
               {typedText}
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: 2,
-                  height: '1.1em',
-                  background: '#7C3AED',
-                  marginLeft: 2,
-                  verticalAlign: 'text-bottom',
-                  animation: 'pulse 1s ease-in-out infinite',
-                }}
-              />
             </span>
+            <span className="w-0.5 h-6 bg-accent animate-blink" />
           </motion.div>
 
           {/* Subheading */}
           <motion.p
-            variants={itemVariants}
-            style={{ color: '#94A3B8', fontSize: '1.05rem', lineHeight: 1.7, maxWidth: 540, marginBottom: 36 }}
+            {...fadeUp(0.4)}
+            className="text-text-muted text-base sm:text-lg leading-relaxed max-w-xl mb-10"
           >
             {heroData.subheading}
           </motion.p>
 
           {/* CTA Buttons */}
-          <motion.div variants={itemVariants} style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 40 }}>
+          <motion.div
+            {...fadeUp(0.5)}
+            className="flex flex-wrap gap-4 mb-12"
+          >
             <button
-              className="btn-primary"
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               id="hero-view-projects"
+              onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
+              className="btn-primary"
             >
-              <Eye size={16} />
-              <span>View Projects</span>
+              View Projects
+              <ArrowDown size={16} />
             </button>
-            <a href={personalInfo.resumeUrl} download className="btn-outline" id="hero-download-resume">
-              <Download size={16} />
-              <span>Download Resume</span>
-            </a>
-            <button
+            <a
+              href={personalInfo.resumeUrl}
+              download
+              id="hero-download-resume"
               className="btn-outline"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              id="hero-contact"
-              style={{ border: '1px solid rgba(6,182,212,0.4)', color: '#06B6D4' }}
             >
-              <Mail size={16} />
-              <span>Contact Me</span>
-            </button>
+              Download Resume
+              <Download size={16} />
+            </a>
           </motion.div>
 
           {/* Social Links */}
-          <motion.div variants={itemVariants} style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-            <span style={{ color: '#94A3B8', fontSize: '0.8rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-              Find me on
-            </span>
-            <div style={{ width: 40, height: 1, background: 'rgba(255,255,255,0.2)' }} />
-            {socialLinks.map(({ icon: Icon, href, label, id }) => (
-              <motion.a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                id={id}
-                whileHover={{ scale: 1.2, color: '#7C3AED' }}
-                style={{ color: '#94A3B8', transition: 'color 0.3s', cursor: 'none' }}
-                aria-label={label}
-              >
-                <Icon size={20} />
-              </motion.a>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Right — Avatar Area */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
-          className="hidden lg:flex"
-          style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}
-        >
-          {/* Orbit ring */}
-          <div
-            style={{
-              width: 320,
-              height: 320,
-              borderRadius: '50%',
-              border: '1px solid rgba(124, 58, 237, 0.2)',
-              position: 'absolute',
-              animation: 'spin 20s linear infinite',
-            }}
-          />
-          <div
-            style={{
-              width: 270,
-              height: 270,
-              borderRadius: '50%',
-              border: '1px dashed rgba(6,182,212,0.2)',
-              position: 'absolute',
-              animation: 'spin 12s linear infinite reverse',
-            }}
-          />
-
-          {/* Avatar container */}
           <motion.div
-            animate={{ y: [0, -15, 0] }}
-            transition={{ duration: 6, ease: 'easeInOut', repeat: Infinity }}
-            style={{
-              width: 220,
-              height: 220,
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.2))',
-              border: '2px solid rgba(124,58,237,0.4)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 0 60px rgba(124,58,237,0.3)',
-              overflow: 'hidden',
-              position: 'relative',
-            }}
+            {...fadeUp(0.6)}
+            className="flex items-center gap-4"
           >
-            <img
-              src="/profile.jpg"
-              alt="Anandu A (Myles)"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
-              onError={e => {
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'flex';
-              }}
-            />
-            {/* Fallback */}
-            <div style={{
-              display: 'none',
-              width: '100%',
-              height: '100%',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontFamily: 'Sora, sans-serif',
-              fontSize: '4rem',
-              fontWeight: 800,
-              background: 'linear-gradient(135deg, #7C3AED, #06B6D4)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}>
-              M
-            </div>
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noreferrer"
+              id="hero-github"
+              className="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center text-text-muted hover:text-text-primary hover:border-white/20 transition-all duration-200"
+            >
+              <FaGithub size={18} />
+            </a>
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              id="hero-linkedin"
+              className="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center text-text-muted hover:text-text-primary hover:border-white/20 transition-all duration-200"
+            >
+              <FaLinkedinIn size={18} />
+            </a>
+            <a
+              href={`mailto:${personalInfo.email}`}
+              id="hero-email"
+              className="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center text-text-muted hover:text-text-primary hover:border-white/20 transition-all duration-200"
+            >
+              <Mail size={18} />
+            </a>
+            <div className="h-px w-8 bg-white/10" />
+            <span className="text-text-subtle text-xs">{personalInfo.location}</span>
           </motion.div>
-
-          {/* Floating badges */}
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 3, ease: 'easeInOut', repeat: Infinity, delay: 0 }}
-            className="glass-card"
-            style={{
-              position: 'absolute',
-              top: 20,
-              right: -10,
-              padding: '8px 16px',
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              color: '#8B5CF6',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-            }}
-          >
-            <span>⚡</span> Full Stack Dev
-          </motion.div>
-
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 3, ease: 'easeInOut', repeat: Infinity, delay: 1 }}
-            className="glass-card"
-            style={{
-              position: 'absolute',
-              bottom: 30,
-              left: -20,
-              padding: '8px 16px',
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              color: '#06B6D4',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-            }}
-          >
-            <span>📱</span> Flutter Dev
-          </motion.div>
-
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 3, ease: 'easeInOut', repeat: Infinity, delay: 2 }}
-            className="glass-card"
-            style={{
-              position: 'absolute',
-              bottom: 80,
-              right: -30,
-              padding: '8px 16px',
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              color: '#F59E0B',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-            }}
-          >
-            <span>🤖</span> AI Curious
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        style={{
-          position: 'absolute',
-          bottom: 32,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 8,
-          cursor: 'none',
-        }}
-        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-text-subtle"
       >
-        <span style={{ color: '#94A3B8', fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-          Scroll Down
-        </span>
+        <span className="text-2xs tracking-widest uppercase">Scroll</span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-          style={{
-            width: 24,
-            height: 36,
-            border: '2px solid rgba(124,58,237,0.4)',
-            borderRadius: 12,
-            display: 'flex',
-            justifyContent: 'center',
-            paddingTop: 6,
-          }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <div style={{ width: 3, height: 8, borderRadius: 2, background: '#7C3AED' }} />
+          <ArrowDown size={14} />
         </motion.div>
       </motion.div>
     </section>

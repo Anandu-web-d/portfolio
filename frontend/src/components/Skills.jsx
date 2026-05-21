@@ -1,176 +1,92 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { skillCategories } from '../utils/data';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-
-const SkillBar = ({ name, level, color, visible, delay }) => (
-  <div style={{ marginBottom: 14 }}>
-    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-      <span style={{ color: '#F8FAFC', fontSize: '0.88rem', fontWeight: 500 }}>{name}</span>
-      <span style={{ color: '#94A3B8', fontSize: '0.8rem' }}>{level}%</span>
-    </div>
-    <div className="skill-bar-track">
-      <motion.div
-        className="skill-bar-fill"
-        initial={{ width: 0 }}
-        animate={{ width: visible ? `${level}%` : 0 }}
-        transition={{ duration: 1.4, delay: delay, ease: [0.4, 0, 0.2, 1] }}
-        style={{ background: `linear-gradient(90deg, ${color}, #06B6D4)` }}
-      />
-    </div>
-  </div>
-);
+import { skillCategories } from '../utils/data';
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState('Frontend');
   const [ref, visible] = useScrollReveal();
+  const [active, setActive] = useState(skillCategories[0].category);
 
-  const active = skillCategories.find(c => c.category === activeCategory) || skillCategories[0];
+  const current = skillCategories.find(c => c.category === active);
 
   return (
-    <section
-      id="skills"
-      style={{ padding: '100px 0', background: 'rgba(255,255,255,0.01)', position: 'relative' }}
-    >
-      <div className="orb orb-primary" style={{ width: 350, height: 350, top: '20%', right: '-5%', opacity: 0.1 }} />
-
-      <div
-        ref={ref}
-        style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}
-      >
-        {/* Header */}
+    <section id="skills" className="section">
+      <div className="container-main">
         <motion.div
+          ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          style={{ marginBottom: 52 }}
         >
-          <div className="section-tag">⚡ Skills</div>
-          <h2 className="section-title">
-            My Technical{' '}
-            <span className="gradient-text">Expertise</span>
-          </h2>
-          <p className="section-subtitle">Technologies and tools I use to build modern applications.</p>
-        </motion.div>
+          {/* Header */}
+          <span className="section-label">Skills</span>
+          <h2 className="section-title">What I Work With</h2>
+          <p className="section-subtitle mb-10">
+            Technologies and tools I use to build scalable applications.
+          </p>
 
-        {/* Category Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 48 }}
-        >
-          {skillCategories.map(({ category, icon }) => (
-            <button
-              key={category}
-              className={`filter-pill ${activeCategory === category ? 'active' : ''}`}
-              onClick={() => setActiveCategory(category)}
-              id={`skill-tab-${category.toLowerCase()}`}
-            >
-              {icon} {category}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Skills Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}
-          className="block md:grid">
-          {/* Category Card */}
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, x: -20 }}
-            animate={visible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="glass-card"
-            style={{ padding: 32 }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
-              <div style={{
-                width: 48,
-                height: 48,
-                borderRadius: 12,
-                background: `${active.color}20`,
-                border: `1px solid ${active.color}40`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '1.4rem',
-              }}>
-                {active.icon}
-              </div>
-              <div>
-                <h3 style={{ fontFamily: 'Sora, sans-serif', fontWeight: 700, fontSize: '1.2rem', color: '#F8FAFC' }}>
-                  {active.category}
-                </h3>
-                <span style={{ color: '#94A3B8', fontSize: '0.8rem' }}>
-                  {active.skills.length} skills
-                </span>
-              </div>
-            </div>
-            {active.skills.map((skill, i) => (
-              <SkillBar
-                key={skill.name}
-                name={skill.name}
-                level={skill.level}
-                color={active.color}
-                visible={visible}
-                delay={i * 0.08}
-              />
+          {/* Category Tabs */}
+          <div className="flex flex-wrap gap-2 mb-8">
+            {skillCategories.map((cat) => (
+              <button
+                key={cat.category}
+                id={`skills-tab-${cat.category.toLowerCase()}`}
+                onClick={() => setActive(cat.category)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  active === cat.category
+                    ? 'bg-accent text-white shadow-accent'
+                    : 'bg-white/5 text-text-muted hover:bg-white/8 hover:text-text-primary border border-white/5'
+                }`}
+              >
+                {cat.category}
+              </button>
             ))}
-          </motion.div>
+          </div>
 
-          {/* All Category Overview */}
+          {/* Skills Grid */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={visible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.15 }}
+            key={active}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35 }}
+            className="card"
           >
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-              {skillCategories.map((cat, i) => (
-                <motion.div
-                  key={cat.category}
-                  className={`glass-card-hover ${activeCategory === cat.category ? 'glow-primary' : ''}`}
-                  style={{
-                    padding: '18px',
-                    cursor: 'none',
-                    borderColor: activeCategory === cat.category ? `${cat.color}50` : undefined,
-                  }}
-                  onClick={() => setActiveCategory(cat.category)}
-                  whileHover={{ scale: 1.02 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={visible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: i * 0.07 + 0.3 }}
-                >
-                  <div style={{ fontSize: '1.4rem', marginBottom: 8 }}>{cat.icon}</div>
-                  <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F8FAFC', marginBottom: 2 }}>
-                    {cat.category}
-                  </div>
-                  <div style={{ color: '#94A3B8', fontSize: '0.75rem' }}>
-                    {cat.skills.length} technologies
-                  </div>
-                </motion.div>
+            <div className="flex flex-wrap gap-2.5">
+              {current?.skills.map((skill) => (
+                <span key={skill} className="skill-badge">
+                  {skill}
+                </span>
               ))}
             </div>
-
-            {/* Tech logos grid */}
-            <motion.div
-              className="glass-card"
-              style={{ padding: 24, marginTop: 14 }}
-              initial={{ opacity: 0 }}
-              animate={visible ? { opacity: 1 } : {}}
-              transition={{ delay: 0.5 }}
-            >
-              <div style={{ color: '#94A3B8', fontSize: '0.8rem', marginBottom: 14, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                Top Technologies
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {['React', 'Node.js', 'Flutter', 'MongoDB', 'PHP', 'Python', 'JavaScript', 'Tailwind', 'Firebase', 'MySQL'].map(tech => (
-                  <span key={tech} className="neon-badge" style={{ cursor: 'none' }}>{tech}</span>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
-        </div>
+
+          {/* All skills overview */}
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {skillCategories.map((cat, i) => (
+              <motion.button
+                key={cat.category}
+                initial={{ opacity: 0, y: 20 }}
+                animate={visible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                id={`skills-card-${cat.category.toLowerCase()}`}
+                onClick={() => setActive(cat.category)}
+                className={`card card-hover text-left transition-all duration-200 ${
+                  active === cat.category ? 'border-accent/30 bg-accent/5' : ''
+                }`}
+              >
+                <p className="text-xs text-text-subtle uppercase tracking-widest mb-2 font-medium">
+                  {cat.category}
+                </p>
+                <p className="text-text-muted text-sm leading-relaxed">
+                  {cat.skills.slice(0, 3).join(', ')}
+                  {cat.skills.length > 3 && (
+                    <span className="text-accent"> +{cat.skills.length - 3} more</span>
+                  )}
+                </p>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
