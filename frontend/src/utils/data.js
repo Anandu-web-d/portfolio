@@ -11,9 +11,9 @@ export const personalInfo = {
   email: "anandusachu1180@gmail.com",
   phone: "+91 7736707197",
   education: "BCA — SB College",
-  github: "https://github.com/",
-  linkedin: "https://linkedin.com/in/",
-  instagram: "https://instagram.com/",
+  github: "https://github.com/Anandu-web-d",
+  linkedin: "https://www.linkedin.com/in/anandu-a-697205269?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+  instagram: "https://www.instagram.com/anandu.______?igsh=MWlna3RmeHhsYXJmcg==",
   resumeUrl: "/resume.pdf",
 };
 
@@ -47,7 +47,7 @@ export const aboutData = {
   interests: [
     "UI/UX Design",
     "Open Source",
-    "Boxing",
+    "Cricket",
     "Traveling",
     "Creative Branding",
     "Tech Innovation",
