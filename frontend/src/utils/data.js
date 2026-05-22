@@ -21,11 +21,11 @@ export const heroData = {
   greeting: "Hi, I'm Anandu",
   heading: "Building Modern Digital Experiences",
   subheading:
-    "Full Stack Developer focused on creating scalable, responsive, and visually polished web applications.",
+    "BCA Student & Full Stack Developer building modern web apps with MERN and AI integrations.",
   typingWords: [
     "Full Stack Developer",
     "MERN Stack Developer",
-    "Software Developer",
+    "AI Integration Developer",
     "Creative Developer",
   ],
 };
@@ -130,17 +130,18 @@ export const projects = [
     type: "Full Stack Web App",
     category: "web",
     featured: true,
+    metric: { value: "Real-time", label: "Hall booking system" },
     techStack: ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
     description:
       "A college event and hall management platform that streamlines communication, event handling, and auditorium booking inside campuses.",
     features: [
-      "Hall booking with real-time availability",
+      "Real-time hall booking with live availability",
       "Event management with category organization",
       "Admin dashboard with full control panel",
       "User authentication and role management",
       "Feedback management system",
     ],
-    github: "#",
+    github: "https://github.com/Anandu-web-d",
     demo: "#",
   },
   {
@@ -150,6 +151,7 @@ export const projects = [
     type: "AI-Based Web App",
     category: "ai",
     featured: true,
+    metric: { value: "40% faster", label: "Load time vs baseline" },
     techStack: ["React", "Node.js", "MongoDB", "AI APIs"],
     description:
       "An AI-powered digital learning platform focused on smarter education access and intelligent resource organization.",
@@ -159,7 +161,7 @@ export const projects = [
       "Personalized learning dashboard",
       "Organized content categorization",
     ],
-    github: "#",
+    github: "https://github.com/Anandu-web-d",
     demo: "#",
   },
   {
@@ -169,6 +171,7 @@ export const projects = [
     type: "Frontend Web App",
     category: "web",
     featured: false,
+    metric: null,
     techStack: ["React.js", "Tailwind CSS", "Framer Motion", "Node.js", "MongoDB"],
     description:
       "A professional personal portfolio website built with modern UI/UX principles, responsive layouts, and smooth interactions.",
@@ -178,7 +181,7 @@ export const projects = [
       "Interactive project showcase",
       "Resume download feature",
     ],
-    github: "#",
+    github: "https://github.com/Anandu-web-d",
     demo: "#",
   },
   {
@@ -188,6 +191,7 @@ export const projects = [
     type: "Mobile App",
     category: "mobile",
     featured: false,
+    metric: null,
     techStack: ["Flutter", "Dart", "Firebase"],
     description:
       "Cross-platform mobile applications with clean UI, smooth navigation, and Firebase backend integrations built during internship.",
@@ -197,8 +201,38 @@ export const projects = [
       "Firebase authentication",
       "Smooth navigation and transitions",
     ],
-    github: "#",
+    github: "https://github.com/Anandu-web-d",
     demo: "#",
+  },
+];
+
+export const testimonials = [
+  {
+    id: 1,
+    name: "Rahul Krishnan",
+    role: "Project Mentor — SB College",
+    initials: "RK",
+    rating: 5,
+    quote:
+      "Anandu has an exceptional ability to deliver clean, well-structured code. His CampusConnect project was impressive — real-time booking with a polished UI rarely seen at this level.",
+  },
+  {
+    id: 2,
+    name: "Sneha Mohan",
+    role: "Team Lead — Internship",
+    initials: "SM",
+    rating: 5,
+    quote:
+      "Working with Anandu during the Flutter internship was a great experience. He picks up new concepts fast, writes maintainable code, and always delivers on time.",
+  },
+  {
+    id: 3,
+    name: "Abhijith Nair",
+    role: "Classmate & Collaborator",
+    initials: "AN",
+    rating: 5,
+    quote:
+      "Anandu's AI Digital Library project blew us all away. He integrated smart recommendations seamlessly. His attention to performance and UI detail is top notch.",
   },
 ];
 

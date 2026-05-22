@@ -2,7 +2,7 @@
    Global Design System — Professional Portfolio
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -25,19 +25,20 @@
   }
 
   body {
-    font-family: 'Inter', sans-serif;
-    background-color: #0B1120;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #080E1D;
     color: #F9FAFB;
-    line-height: 1.6;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Sora', sans-serif;
-    line-height: 1.2;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.15;
     color: #F9FAFB;
+    letter-spacing: -0.02em;
   }
 
   a {
@@ -60,13 +61,13 @@
 
   /* Scrollbar */
   ::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
   }
   ::-webkit-scrollbar-track {
-    background: #0B1120;
+    background: #080E1D;
   }
   ::-webkit-scrollbar-thumb {
-    background: #374151;
+    background: #2D3748;
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -74,11 +75,11 @@
   }
   * {
     scrollbar-width: thin;
-    scrollbar-color: #374151 #0B1120;
+    scrollbar-color: #2D3748 #080E1D;
   }
 
   ::selection {
-    background: rgba(99, 102, 241, 0.3);
+    background: rgba(99, 102, 241, 0.35);
     color: #F9FAFB;
   }
 }
@@ -90,44 +91,45 @@
 
   /* Container */
   .container-main {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-6xl mx-auto px-5 sm:px-7 lg:px-10;
   }
 
   /* Section spacing */
   .section {
-    @apply py-20 lg:py-28;
+    @apply py-24 lg:py-32;
   }
 
   /* Section header */
   .section-label {
-    @apply text-accent text-sm font-semibold tracking-widest uppercase mb-3 block;
+    @apply text-accent text-xs font-bold tracking-[0.2em] uppercase mb-4 block;
   }
 
   .section-title {
-    @apply font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-4;
+    @apply font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-5;
+    letter-spacing: -0.025em;
   }
 
   .section-subtitle {
-    @apply text-text-muted text-base sm:text-lg max-w-2xl;
+    @apply text-text-muted text-base sm:text-lg max-w-2xl leading-relaxed;
   }
 
   /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-lg
-           transition-all duration-300 hover:bg-accent-hover hover:shadow-accent
-           active:scale-95 text-sm;
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-semibold rounded-xl
+           transition-all duration-300 hover:bg-accent-hover hover:shadow-accent hover:-translate-y-0.5
+           active:scale-95 text-sm tracking-wide;
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-6 py-3 border border-white/10 text-text-primary font-semibold rounded-lg
-           transition-all duration-300 hover:border-accent hover:text-accent
-           active:scale-95 text-sm bg-transparent;
+    @apply inline-flex items-center gap-2 px-6 py-3 border border-white/12 text-text-primary font-semibold rounded-xl
+           transition-all duration-300 hover:border-accent/50 hover:text-accent hover:bg-accent/5 hover:-translate-y-0.5
+           active:scale-95 text-sm tracking-wide bg-transparent;
   }
 
   /* Cards */
   .card {
-    @apply bg-card border border-white/5 rounded-xl p-6
-           transition-all duration-300 hover:border-white/10 hover:shadow-card-hover;
+    @apply bg-card border border-white/6 rounded-2xl p-6
+           transition-all duration-300 hover:border-white/12 hover:shadow-card-hover;
   }
 
   .card-hover {
@@ -136,15 +138,15 @@
 
   /* Skill badge */
   .skill-badge {
-    @apply px-3 py-1.5 bg-white/5 border border-white/8 rounded-md text-sm text-text-muted
+    @apply px-3.5 py-1.5 bg-white/5 border border-white/8 rounded-lg text-sm text-text-muted
            font-medium transition-all duration-200 hover:bg-accent/10 hover:border-accent/30
            hover:text-accent-light cursor-default;
   }
 
   /* Tech tag */
   .tech-tag {
-    @apply px-2.5 py-1 bg-accent/10 border border-accent/20 text-accent-light rounded-md
-           text-xs font-medium;
+    @apply px-2.5 py-1 bg-accent/10 border border-accent/20 text-accent-light rounded-lg
+           text-xs font-semibold tracking-wide;
   }
 
   /* Nav link */
@@ -164,9 +166,9 @@
 
   /* Input */
   .input {
-    @apply w-full bg-white/5 border border-white/8 rounded-lg px-4 py-3 text-text-primary
+    @apply w-full bg-white/5 border border-white/8 rounded-xl px-4 py-3.5 text-text-primary
            placeholder-text-subtle text-sm font-medium outline-none transition-all duration-200
-           focus:border-accent/50 focus:bg-white/10;
+           focus:border-accent/50 focus:bg-white/8;
   }
 
   /* Timeline dot */
@@ -180,7 +182,7 @@
 ───────────────────────────────────── */
 @layer utilities {
   .gradient-text {
-    background: linear-gradient(135deg, #6366F1, #818CF8);
+    background: linear-gradient(135deg, #6366F1 0%, #A78BFA 50%, #818CF8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -194,6 +196,38 @@
     border-color: rgba(255, 255, 255, 0.08);
   }
 
+  .border-white\/6 {
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .border-white\/12 {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .bg-white\/4 {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .bg-white\/8 {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .bg-accent\/8 {
+    background-color: rgba(99, 102, 241, 0.08);
+  }
+
+  .bg-accent\/5 {
+    background-color: rgba(99, 102, 241, 0.05);
+  }
+
+  .bg-emerald-500\/8 {
+    background-color: rgba(16, 185, 129, 0.08);
+  }
+
+  .bg-emerald-500\/15 {
+    background-color: rgba(16, 185, 129, 0.15);
+  }
+
   .text-balance {
     text-wrap: balance;
   }
@@ -201,6 +235,10 @@
   .no-overflow {
     overflow-x: hidden;
     max-width: 100vw;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 }
 
@@ -212,9 +250,44 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.08) 0%, transparent 60%);
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(99,102,241,0.1) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(139,92,246,0.05) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
+}
+
+/* ─────────────────────────────────────
+   Section alternation
+───────────────────────────────────── */
+main > section:nth-child(even) {
+  position: relative;
+}
+
+/* ─────────────────────────────────────
+   Premium micro-animations
+───────────────────────────────────── */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer-slide {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(99,102,241,0.3); }
+  70% { box-shadow: 0 0 0 10px rgba(99,102,241,0); }
+  100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); }
+}
+
+.animate-float {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.5s ease-out infinite;
 }
 
 /* ─────────────────────────────────────
@@ -223,7 +296,7 @@ body::before {
 @media (max-width: 640px) {
   .section-title {
     font-size: 1.875rem;
-    line-height: 1.25;
+    line-height: 1.2;
   }
 
   .btn-primary,
