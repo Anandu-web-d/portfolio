@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowDown, Download, Mail, ExternalLink, Zap, Clock } from 'lucide-react';
+import { ArrowDown, Download, Mail, ExternalLink } from 'lucide-react';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { heroData, personalInfo } from '../utils/data';
 import { useTypingEffect } from '../hooks/useTypingEffect';
@@ -10,11 +10,6 @@ const fadeUp = (delay = 0) => ({
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
 });
-
-const metrics = [
-  { icon: Clock, value: '40%', label: 'Load time reduced', color: 'text-emerald-400' },
-  { icon: Zap, value: 'Real-time', label: 'Hall booking system', color: 'text-violet-400' },
-];
 
 const Hero = () => {
   const typedText = useTypingEffect(heroData.typingWords, 80, 50, 2000);
@@ -72,26 +67,9 @@ const Hero = () => {
               {heroData.subheading}
             </motion.p>
 
-            {/* Project Metrics */}
-            <motion.div
-              {...fadeUp(0.4)}
-              className="flex flex-wrap gap-3 mb-10"
-            >
-              {metrics.map(({ icon: Icon, value, label, color }) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-white/8 bg-white/4 backdrop-blur-sm hover:border-white/15 transition-all duration-300"
-                >
-                  <Icon size={15} className={color} />
-                  <span className={`text-sm font-bold ${color}`}>{value}</span>
-                  <span className="text-text-subtle text-xs">{label}</span>
-                </div>
-              ))}
-            </motion.div>
-
             {/* CTA Buttons */}
             <motion.div
-              {...fadeUp(0.48)}
+              {...fadeUp(0.4)}
               className="flex flex-wrap gap-4 mb-10"
             >
               <button
@@ -126,7 +104,7 @@ const Hero = () => {
 
             {/* Social Links */}
             <motion.div
-              {...fadeUp(0.55)}
+              {...fadeUp(0.48)}
               className="flex items-center gap-4"
             >
               <a

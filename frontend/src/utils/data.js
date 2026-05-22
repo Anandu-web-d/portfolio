@@ -130,7 +130,7 @@ export const projects = [
     type: "Full Stack Web App",
     category: "web",
     featured: true,
-    metric: { value: "Real-time", label: "Hall booking system" },
+    metric: null,
     techStack: ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
     description:
       "A college event and hall management platform that streamlines communication, event handling, and auditorium booking inside campuses.",
@@ -151,7 +151,7 @@ export const projects = [
     type: "AI-Based Web App",
     category: "ai",
     featured: true,
-    metric: { value: "40% faster", label: "Load time vs baseline" },
+    metric: null,
     techStack: ["React", "Node.js", "MongoDB", "AI APIs"],
     description:
       "An AI-powered digital learning platform focused on smarter education access and intelligent resource organization.",
@@ -209,7 +209,7 @@ export const projects = [
 export const testimonials = [
   {
     id: 1,
-    name: "Rahul Krishnan",
+    name: "PRASHOB JOHN",
     role: "Project Mentor — SB College",
     initials: "RK",
     rating: 5,
@@ -227,8 +227,8 @@ export const testimonials = [
   },
   {
     id: 3,
-    name: "Abhijith Nair",
-    role: "Classmate & Collaborator",
+    name: "SOORAJ SANTHOSH",
+    role: "Classmate",
     initials: "AN",
     rating: 5,
     quote:
