@@ -1,4 +1,4 @@
-# Anandu A (Myles) — Portfolio Website
+# Anandu A — Portfolio Website
 
 A premium, production-ready, full-stack portfolio website built with the MERN stack.
 
@@ -158,7 +158,7 @@ frontend/public/resume.pdf
 
 ## 👤 Author
 
-**Anandu A (Myles)**  
+**Anandu A**  
 Full Stack Developer | Flutter Developer | AI Enthusiast  
 Kerala, India  
 📧 anandusachu1180@gmail.com

@@ -44,7 +44,7 @@ const sendNotificationEmail = async ({ name, email, subject, message }) => {
 
   // Auto-reply to sender
   await transporter.sendMail({
-    from: `"Anandu A (Myles)" <${process.env.EMAIL_USER}>`,
+    from: `"Anandu A" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: `Thanks for reaching out, ${name}! 👋`,
     html: `
@@ -57,7 +57,7 @@ const sendNotificationEmail = async ({ name, email, subject, message }) => {
           In the meantime, feel free to check out my projects on GitHub or connect with me on LinkedIn.
         </p>
         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; color: #94A3B8; font-size: 0.85rem;">
-          <strong style="color: #F8FAFC;">Anandu A (Myles)</strong><br/>
+          <strong style="color: #F8FAFC;">Anandu A</strong><br/>
           Full Stack Developer | Flutter Developer | AI Enthusiast<br/>
           Kerala, India
         </div>

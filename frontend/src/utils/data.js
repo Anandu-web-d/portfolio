@@ -1,5 +1,5 @@
 // ============================================================
-// Portfolio Data — Anandu A (Myles) — Clean Professional Version
+// Portfolio Data — Anandu A — Clean Professional Version
 // ============================================================
 
 export const personalInfo = {

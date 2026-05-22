@@ -160,7 +160,7 @@ const Hero = () => {
 
                 {/* Name tag at bottom */}
                 <div className="absolute bottom-4 left-4 right-4 bg-[#080E1D]/75 backdrop-blur-md rounded-xl px-4 py-3 border border-white/10">
-                  <p className="font-heading font-bold text-text-primary text-sm">Anandu A (Myles)</p>
+                  <p className="font-heading font-bold text-text-primary text-sm">Anandu A</p>
                   <p className="text-accent text-xs font-semibold">Full Stack Developer</p>
                 </div>
               </div>
